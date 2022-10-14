@@ -9,7 +9,7 @@ set_target_properties(ip_filter_cli ip_filter PROPERTIES
 #rename the executable to "ip_filter"
 set_target_properties(ip_filter_cli PROPERTIES OUTPUT_NAME ip_filter)
 
-target_link_libraries(ip_filter_cli PRIVATE ipfilter)
+target_link_libraries(ip_filter_cli PRIVATE ip_filter)
 
 #BEGIN release
 install(TARGETS ip_filter_cli RUNTIME DESTINATION bin)
