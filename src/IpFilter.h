@@ -1,9 +1,11 @@
 #pragma once
 
+#include <array>
 #include <vector>
-#include <string>
 
 namespace Homework {
 
-    std::vector<std::string> filterIpAddresses(const std::vector<std::string>& ipAddresses);
+    using IpAddress = std::array<int, 4>;
+
+    std::vector<IpAddress> filterIpAddresses(const std::vector<IpAddress>& ipAddresses);
 };
