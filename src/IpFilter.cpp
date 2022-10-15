@@ -46,19 +46,21 @@ namespace Homework {
 
     std::vector<IpAddress> filterIpAddresses(const std::vector<IpAddress>& ipAddresses) {
         //sort the IP list
-        auto result = ipAddresses;
-        std::sort(result.begin(), result.end(), createIpAddressComparator());
+        auto sortedIpAddresses = ipAddresses;
+        std::sort(sortedIpAddresses.begin(), sortedIpAddresses.end(), createIpAddressComparator());
+
+        auto result = sortedIpAddresses;
 
         //find IPs which matches "1.x.x.x"
-        auto filteredIps = filter(ipAddresses, 1);
+        auto filteredIps = filter(sortedIpAddresses, 1);
         result.insert(result.end(), filteredIps.begin(), filteredIps.end());
 
         //find IPs which matches "46.70.x.x"
-        filteredIps = filter(ipAddresses, 46, 70);
+        filteredIps = filter(sortedIpAddresses, 46, 70);
         result.insert(result.end(), filteredIps.begin(), filteredIps.end());
         
         //find IPs with any byte equals to 46
-        filteredIps = filterAny(ipAddresses, 46);
+        filteredIps = filterAny(sortedIpAddresses, 46);
         result.insert(result.end(), filteredIps.begin(), filteredIps.end());
         return result;
     }

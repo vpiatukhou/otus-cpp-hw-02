@@ -21,10 +21,10 @@ namespace Homework {
         return ipAddress;
     }
 
-    std::vector<IpAddress> readIpAddressesFromInput(std::istream& in) {
+    std::vector<IpAddress> readIpAddressesFromInput() {
         std::vector<IpAddress> ipAddresses;
         std::string line;
-        while (std::getline(in, line)) {
+        while (std::getline(std::cin, line)) {
             std::string ipAsString = line.substr(0, line.find_first_of(TAB_CHARACTER));
             ipAddresses.push_back(convertStringToIpAddress(ipAsString));
         }
@@ -37,23 +37,14 @@ namespace Homework {
             + IP_DELIMITER + std::to_string(ipAddress[2]) 
             + IP_DELIMITER + std::to_string(ipAddress[3]);
     }
-
-    void printIpAddresses(const std::vector<IpAddress>& ipAddresses, std::ostream& out) {
-        for (const auto& ipAddress : ipAddresses) {
-            out << convertIpAddressToString(ipAddress) << std::endl;
-        }
-    }
-
-    void filterIpAddresses(std::istream& in, std::ostream& out) {
-        auto ipAddresses = readIpAddressesFromInput(in);
-        auto filteredIpAddresses = filterIpAddresses(ipAddresses);
-        printIpAddresses(filteredIpAddresses, out);
-    }
 }
 
 int main() {
-    auto ipAddresses = Homework::readIpAddressesFromInput(std::cin);
+    auto ipAddresses = Homework::readIpAddressesFromInput();
     auto filteredIpAddresses = Homework::filterIpAddresses(ipAddresses);
-    Homework::printIpAddresses(filteredIpAddresses, std::cout);
+    
+    for (const auto& ipAddress : filteredIpAddresses) {
+        std::cout << Homework::convertIpAddressToString(ipAddress) << std::endl;
+    }
     return 0;
 }
