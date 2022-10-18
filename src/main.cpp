@@ -7,17 +7,17 @@ namespace Homework {
 
     const char TAB_CHARACTER = '\t';
     const char IP_DELIMITER = '.';
-    const int NUMBER_OF_IP_PARTS = 4;
 
     IpAddress convertStringToIpAddress(const std::string& ipAsString) {
         IpAddress ipAddress;
         size_t startIndex = 0;
-        for (size_t i = 0; i < NUMBER_OF_IP_PARTS; ++i) {
-            size_t delimiterIndex = ipAsString.find_first_of('.', startIndex);
-            std::string part = ipAsString.substr(startIndex, delimiterIndex);
-            ipAddress[i] = std::stoi(part);
+        size_t delimiterIndex = ipAsString.find_first_of(IP_DELIMITER);
+        for (size_t i = 0; delimiterIndex != std::string::npos; ++i) {
+            ipAddress[i] = std::stoi(ipAsString.substr(startIndex, delimiterIndex - startIndex));
             startIndex = delimiterIndex + 1;
+            delimiterIndex = ipAsString.find_first_of(IP_DELIMITER, startIndex);
         }
+        ipAddress[3] = std::stoi(ipAsString.substr(startIndex));
         return ipAddress;
     }
 
