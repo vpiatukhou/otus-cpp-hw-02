@@ -18,7 +18,7 @@ namespace Homework {
             try {
                 ipAddresses.push_back(convertStringToIpAddress(ipAsString));
             } catch (const IpAddressParsingException& e) {
-                throw IpAddressParsingException("Error parsing IP addresses " + ipAsString + ": " + e.what());
+                throw IpAddressParsingException("Error parsing IP address " + ipAsString + ": " + e.what());
             }
         }
         return ipAddresses;
@@ -37,7 +37,7 @@ int main() {
     try {
         ipAddresses = Homework::readIpAddressesFromInput();
     } catch (const Homework::IpAddressParsingException& e) {
-        std::cout << "Error reading a list of IP address: " << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
         return 1;
     }
     auto filteredIpAddresses = Homework::filterIpAddresses(ipAddresses);

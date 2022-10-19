@@ -1,19 +1,23 @@
 #include "IpConvertor.h"
+#include <algorithm>
+#include <cctype>
 
 namespace Homework {
     const int IP_MAX_VALUE = 255;
     const char IP_DELIMITER = '.';
     const size_t IP_NUMBER_OF_DELIMITERS = 3;
 
+    bool isNumber(const std::string& str) {
+        return std::all_of(str.begin(), str.end(), std::isdigit);
+    }
+
     int parseIpPart(const std::string& ipPart) {
-        int result;
-        try {
-            result = std::stoi(ipPart);
-        } catch (...) {
-            throw IpAddressParsingException(ipPart + " must be an integer number.");
+        if (!isNumber(ipPart)) {
+            throw IpAddressParsingException("'" + ipPart + "' is not a positive integer number.");
         }
+        int result = std::stoi(ipPart);
         if (result < 0 || result > IP_MAX_VALUE) {
-            throw IpAddressParsingException(ipPart + " is out of range [0..255].");
+            throw IpAddressParsingException("'" + ipPart + "' is out of range [0..255].");
         }
         return result;
     }

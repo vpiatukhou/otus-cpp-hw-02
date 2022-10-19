@@ -35,6 +35,10 @@ TEST(IpConvertorTest, convertStringToIpAddressNotNumber) {
     HomeworkTest::testIpAddressParsingException("1.a.1.1");
 }
 
+TEST(IpConvertorTest, convertStringToIpAddressNotInteger) {
+    HomeworkTest::testIpAddressParsingException("1.2,5.1.1");
+}
+
 TEST(IpConvertorTest, convertStringToIpAddressOutOfRange) {
     HomeworkTest::testIpAddressParsingException("1.256.1.1");
 }
