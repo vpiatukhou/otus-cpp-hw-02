@@ -18,7 +18,7 @@ namespace Homework {
             try {
                 ipAddresses.push_back(convertStringToIpAddress(ipAsString));
             } catch (const IpAddressParsingException& e) {
-                throw IpAddressParsingException("Error parsing IP address " + ipAsString + ": " + e.what());
+                throw IpAddressParsingException("Error parsing IP addresses " + ipAsString + ": " + e.what());
             }
         }
         return ipAddresses;
