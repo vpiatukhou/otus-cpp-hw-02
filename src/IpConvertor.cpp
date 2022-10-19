@@ -12,6 +12,9 @@ namespace Homework {
     }
 
     int parseIpPart(const std::string& ipPart) {
+        if (ipPart.empty()) {
+            throw IpAddressParsingException("IP address must not contain empty parts.");
+        }
         if (!isNumber(ipPart)) {
             throw IpAddressParsingException("'" + ipPart + "' is not a positive integer number.");
         }
