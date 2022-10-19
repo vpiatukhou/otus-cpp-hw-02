@@ -1,5 +1,5 @@
 add_executable(ip_filter_cli main.cpp)
-add_library(ip_filter IpFilter.cpp)
+add_library(ip_filter IpFilter.cpp IpConvertor.cpp)
 
 set_target_properties(ip_filter_cli ip_filter PROPERTIES 
     CMAKE_CXX_STANDARD 14 

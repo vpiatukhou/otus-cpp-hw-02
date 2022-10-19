@@ -1,4 +1,4 @@
-add_executable(ip_filter_tests IpFilterTests.cpp)
+add_executable(ip_filter_tests IpConvertorTests.cpp IpFilterTests.cpp)
 
 set_target_properties(ip_filter_tests PROPERTIES 
     CMAKE_CXX_STANDARD 14 

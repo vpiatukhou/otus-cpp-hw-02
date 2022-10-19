@@ -1,11 +1,10 @@
 #pragma once
 
+#include "IpAddressType.h"
 #include <array>
 #include <vector>
 
 namespace Homework {
-
-    using IpAddress = std::array<int, 4>;
 
     std::vector<IpAddress> filter(const std::vector<IpAddress>& ipAddresses, int ipPart1);
 

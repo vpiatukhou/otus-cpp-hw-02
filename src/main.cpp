@@ -1,3 +1,5 @@
+#include "IpAddressType.h"
+#include "IpConvertor.h"
 #include "IpFilter.h"
 #include <iostream>
 #include <string>
@@ -8,25 +10,16 @@ namespace Homework {
     const char TAB_CHARACTER = '\t';
     const char IP_DELIMITER = '.';
 
-    IpAddress convertStringToIpAddress(const std::string& ipAsString) {
-        IpAddress ipAddress;
-        size_t startIndex = 0;
-        size_t delimiterIndex = ipAsString.find_first_of(IP_DELIMITER);
-        for (size_t i = 0; delimiterIndex != std::string::npos; ++i) {
-            ipAddress[i] = std::stoi(ipAsString.substr(startIndex, delimiterIndex - startIndex));
-            startIndex = delimiterIndex + 1;
-            delimiterIndex = ipAsString.find_first_of(IP_DELIMITER, startIndex);
-        }
-        ipAddress[3] = std::stoi(ipAsString.substr(startIndex));
-        return ipAddress;
-    }
-
     std::vector<IpAddress> readIpAddressesFromInput() {
         std::vector<IpAddress> ipAddresses;
         std::string line;
         while (std::getline(std::cin, line)) {
             std::string ipAsString = line.substr(0, line.find_first_of(TAB_CHARACTER));
-            ipAddresses.push_back(convertStringToIpAddress(ipAsString));
+            try {
+                ipAddresses.push_back(convertStringToIpAddress(ipAsString));
+            } catch (const IpAddressParsingException& e) {
+                throw IpAddressParsingException("Error parsing IP address " + ipAsString + ": " + e.what());
+            }
         }
         return ipAddresses;
     }
@@ -40,7 +33,13 @@ namespace Homework {
 }
 
 int main() {
-    auto ipAddresses = Homework::readIpAddressesFromInput();
+    std::vector<Homework::IpAddress> ipAddresses;
+    try {
+        ipAddresses = Homework::readIpAddressesFromInput();
+    } catch (const Homework::IpAddressParsingException& e) {
+        std::cout << "Error reading a list of IP address: " << e.what() << std::endl;
+        return 1;
+    }
     auto filteredIpAddresses = Homework::filterIpAddresses(ipAddresses);
     
     for (const auto& ipAddress : filteredIpAddresses) {
