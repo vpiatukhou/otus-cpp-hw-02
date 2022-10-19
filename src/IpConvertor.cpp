@@ -8,13 +8,10 @@ namespace Homework {
     const size_t IP_NUMBER_OF_DELIMITERS = 3;
 
     bool isNumber(const std::string& str) {
-        return std::all_of(str.begin(), str.end(), std::isdigit);
+        return !str.empty() && std::all_of(str.begin(), str.end(), ::isdigit);
     }
 
     int parseIpPart(const std::string& ipPart) {
-        if (ipPart.empty()) {
-            throw IpAddressParsingException("IP address must not contain empty parts.");
-        }
         if (!isNumber(ipPart)) {
             throw IpAddressParsingException("'" + ipPart + "' is not a positive integer number.");
         }
